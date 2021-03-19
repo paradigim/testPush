@@ -1,6 +1,7 @@
 
 const webpush = require('web-push');
 const express = require('express');
+const bodyparser = require('body-parser');
 const vapidKeys = {
     "publicKey":"BF7ekuEOKJrtvX4ornpRrZkkv_ALrNVb4r5RzeqzOgZP-oorGGxQsUROVK2oTymCDEkQKlaNb2WVYplrrtp9MtE",
     "privateKey":"M9B2G_q8S6QaN_QwOhshyNa-4tvhm4KzsSrNF51ZNGg"
@@ -12,10 +13,7 @@ app.use(express.json());
 app.get('/', (req, res) => {
     res.send('SUCCESS')
 })
-
-app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "*")
-})
+app.use(bodyparser.json());
 
 
 webpush.setVapidDetails(
@@ -56,4 +54,4 @@ app.post('/subscribe', (req, res) => {
 })
 
 const port = 5000;
-app.listen(process.env.PORT | port);
+app.listen(process.env.PORT || port);
