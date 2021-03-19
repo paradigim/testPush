@@ -7,7 +7,7 @@ const vapidKeys = {
 };
 
 const app = express();
-app.use(require('cors')());
+app.use(cors);
 app.use(express.json());
 app.use(
     express.urlencoded({
