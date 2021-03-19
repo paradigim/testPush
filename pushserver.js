@@ -23,7 +23,7 @@ webpush.setVapidDetails(
 );
 
 app.post('/subscribe', (req, res) => {
-    const subscription = req.body.notification;
+    const subscription = req.body;
 
     const notificationPayload = {
         "notification": {
