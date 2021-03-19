@@ -7,7 +7,7 @@ const vapidKeys = {
 };
 
 const app = express();
-app.use(cors);
+app.use(require('cors')());
 app.use(express.json());
 app.use(
     express.urlencoded({
@@ -17,7 +17,6 @@ app.use(
 app.get('/', (req, res) => {
     res.send('SUCCESS')
 })
-app.use(bodyParser.json());
 
 
 webpush.setVapidDetails(
@@ -33,11 +32,16 @@ app.post('/subscribe', (req, res) => {
         "notification": {
             "title": "Angular News",
             "body": "Newsletter Available!",
+            // "icon": "assets/blog1.jpg",
             "vibrate": [100, 50, 100],
             "data": {
                 "dateOfArrival": Date.now(),
                 "primaryKey": 1
-            }
+            },
+            // "actions": [{
+            //     "action": "explore",
+            //     "title": "Go to the site"
+            // }]
         }
     };
 
@@ -53,4 +57,4 @@ app.post('/subscribe', (req, res) => {
 })
 
 const port = 5000;
-app.listen(port);
+app.listen(process.env.PORT | port);
