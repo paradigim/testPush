@@ -17,6 +17,7 @@ app.use(
 app.get('/', (req, res) => {
     res.send('SUCCESS')
 })
+app.use(bodyParser.json());
 
 
 webpush.setVapidDetails(
@@ -32,16 +33,11 @@ app.post('/subscribe', (req, res) => {
         "notification": {
             "title": "Angular News",
             "body": "Newsletter Available!",
-            // "icon": "assets/blog1.jpg",
             "vibrate": [100, 50, 100],
             "data": {
                 "dateOfArrival": Date.now(),
                 "primaryKey": 1
-            },
-            // "actions": [{
-            //     "action": "explore",
-            //     "title": "Go to the site"
-            // }]
+            }
         }
     };
 
@@ -56,4 +52,5 @@ app.post('/subscribe', (req, res) => {
     )
 })
 
-app.listen(process.env.PORT || 8082);
+const port = 5000;
+app.listen(port);
