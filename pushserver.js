@@ -28,17 +28,18 @@ app.post('/subscribe', (req, res) => {
     const notificationPayload = {
         "notification": {
             "title": "Angular News",
-            "body": "Newsletter Available!",
             // "icon": "assets/blog1.jpg",
             "vibrate": [100, 50, 100],
             "data": {
-                "dateOfArrival": Date.now(),
-                "primaryKey": 1
+                "url": "https://blog-9a5ab.web.app.com/home"
             },
-            // "actions": [{
-            //     "action": "explore",
-            //     "title": "Go to the site"
-            // }]
+            "requireInteraction": true,
+            "actions": [
+                {
+                  "action": "openapp",
+                  "title": "Open App"
+                }
+            ]
         }
     };
 
