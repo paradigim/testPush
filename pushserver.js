@@ -31,7 +31,7 @@ app.post('/subscribe', (req, res) => {
             // "icon": "assets/blog1.jpg",
             "vibrate": [100, 50, 100],
             "data": {
-                "url": "https://blog-9a5ab.web.app.com/home"
+                "url": "https://blog-9a5ab.web.app/home"
             },
             "requireInteraction": true,
             "actions": [
