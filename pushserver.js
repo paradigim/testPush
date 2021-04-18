@@ -13,7 +13,6 @@ app.use(express.json());
 app.get('/', (req, res) => {
     res.send('SUCCESS')
 })
-app.use(bodyparser.json());
 
 
 webpush.setVapidDetails(
@@ -54,5 +53,5 @@ app.post('/subscribe', (req, res) => {
     )
 })
 
-const port = 5000;
+const port = 6000;
 app.listen(process.env.PORT || port);
