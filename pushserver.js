@@ -42,7 +42,20 @@ app.post('/subscribe', (req, res) => {
         }
     };
 
-    Promise.resolve(webpush.sendNotification(subscription, JSON.stringify(notificationPayload))
+    
+
+    Promise.all(
+        subscription.map(s => webpush.sendNotification(s, JSON.stringify(notificationPayload)))
+    ).then((response) => {
+        res.status(200).json({message: 'Newsletter sent successfully.', response})
+    })
+    .catch(err => {
+        console.error("Error sending notification, reason: ", err);
+        // res.sendStatus(500);
+        res.status(200).json({message: err})
+    });
+
+    /* Promise.resolve(webpush.sendNotification(subscription, JSON.stringify(notificationPayload))
         .then(() => {
             res.status(200).json({message: 'Newsletter sent successfully.'})
         })
@@ -51,7 +64,7 @@ app.post('/subscribe', (req, res) => {
             // res.sendStatus(500);
             res.status(200).json({message: err})
         })
-    )
+    ) */
 })
 
 const port = 5000;
