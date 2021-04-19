@@ -61,7 +61,7 @@ app.post('/subscribe', (req, res) => {
         .catch(err => {
             console.error("Error sending notification, reason: ", err);
             // res.sendStatus(500);
-            res.status(200).json({ERROR: err})
+            res.status(500).json({ERROR: err})
         })
     )
 })
