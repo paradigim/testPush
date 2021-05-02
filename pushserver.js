@@ -3,8 +3,8 @@ const webpush = require('web-push');
 const express = require('express');
 const bodyparser = require('body-parser');
 const vapidKeys = {
-    "publicKey":"BIDfKRckGeFnvXPpufCU5aVrd3WiBl4A__m7rzo2WVKV8NniO901ybBz6hxgzmhBktzHJ124y-fFoutriKN7IBU",
-    "privateKey":"_wA25mOL8drnKYXNmLmaG3PGqpPMNF3kDO2j76Ge2P4"
+    "publicKey":"BF7ekuEOKJrtvX4ornpRrZkkv_ALrNVb4r5RzeqzOgZP-oorGGxQsUROVK2oTymCDEkQKlaNb2WVYplrrtp9MtE",
+    "privateKey":"M9B2G_q8S6QaN_QwOhshyNa-4tvhm4KzsSrNF51ZNGg"
 };
 
 // M9B2G_q8S6QaN_QwOhshyNa-4tvhm4KzsSrNF51ZNGg
