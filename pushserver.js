@@ -23,13 +23,18 @@ webpush.setVapidDetails(
     vapidKeys.privateKey
 );
 
+const fakeDatabase = [];
+app.post('/subscription', (req, res) => {
+    const subscription = req.body
+    fakeDatabase.push(subscription)
+})
+
 app.post('/subscribe', (req, res) => {
     const subscription = req.body;
 
     const notificationPayload = {
         "notification": {
             "title": "Angular News",
-            // "icon": "assets/blog1.jpg",
             "vibrate": [100, 50, 100],
             "data": {
                 "url": "https://blog-9a5ab.web.app/home"
@@ -45,16 +50,28 @@ app.post('/subscribe', (req, res) => {
     };
 
 
-    Promise.resolve(webpush.sendNotification(subscription, JSON.stringify(notificationPayload))
-        .then(() => {
-            res.status(200).json({message: 'Newsletter sent successfully.'})
-        })
-        .catch(err => {
-            console.error("Error sending notification, reason: ", err);
-            // res.sendStatus(500);
-            res.status(500).json({ERROR: err})
-        })
-    )
+    const promises = []
+    fakeDatabase.forEach(subscription => {
+        promises.push(
+        webpush.sendNotification(
+            subscription,
+            JSON.stringify(notificationPayload)
+        )
+        )
+    })
+    Promise.all(promises).then(() => res.sendStatus(200))
+
+
+    // Promise.resolve(webpush.sendNotification(subscription, JSON.stringify(notificationPayload))
+    //     .then(() => {
+    //         res.status(200).json({message: 'Newsletter sent successfully.'})
+    //     })
+    //     .catch(err => {
+    //         console.error("Error sending notification, reason: ", err);
+    //         // res.sendStatus(500);
+    //         res.status(500).json({ERROR: err})
+    //     })
+    // )
 })
 
 const port = 5000;
