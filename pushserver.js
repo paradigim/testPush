@@ -46,17 +46,27 @@ app.post('/subscribe', (req, res) => {
         }
     };
 
+    admin.messaging().subscribeToTopic(subscription, notificationPayload)
+        .then(function(response) {
+            // See the MessagingTopicManagementResponse reference documentation
+            // for the contents of response.
+            console.log('Successfully subscribed to topic:', response);
+        })
+        .catch(function(error) {
+            console.log('Error subscribing to topic:', error);
+        });
 
-    Promise.resolve(webpush.sendNotification(subscription, JSON.stringify(notificationPayload))
-        .then(() => {
-            res.status(200).json({message: 'Newsletter sent successfully.'})
-        })
-        .catch(err => {
-            console.error("Error sending notification, reason: ", err);
-            // res.sendStatus(500);
-            res.status(500).json({ERROR: err})
-        })
-    )
+
+    // Promise.resolve(webpush.sendNotification(subscription, JSON.stringify(notificationPayload))
+    //     .then(() => {
+    //         res.status(200).json({message: 'Newsletter sent successfully.'})
+    //     })
+    //     .catch(err => {
+    //         console.error("Error sending notification, reason: ", err);
+    //         // res.sendStatus(500);
+    //         res.status(500).json({ERROR: err})
+    //     })
+    // )
 })
 
 const port = 5000;
