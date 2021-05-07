@@ -27,6 +27,8 @@ webpush.setVapidDetails(
 app.post('/subscribe', (req, res) => {
     const subscription = req.body;
 
+    console.log('SUB DATA: ', subscription);
+
     const notificationPayload = {
         "notification": {
             "title": "Angular News",
